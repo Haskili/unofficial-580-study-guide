@@ -1,0 +1,151 @@
+\documentclass{article}
+\usepackage[paper=a4paper,margin=0.5in]{geometry}
+\usepackage{hyperref}
+\usepackage{gensymb}
+\usepackage{graphicx}
+\begin{document}
+	\null\hfill\begin{tabular}[t]{l@{}}
+	\textit{CSCI 580 Unofficial Midterm Study Guide}\\
+	\end{tabular} \\ \\
+\section*{Chapter 1 -- Intro}
+\begin{itemize}
+	\item Intelligence types:
+	\begin{itemize}
+		\item Humanity: Turing Test Approach
+		\begin{itemize}
+			\item How long will it take for a human opponent to tell that it's adversary isn't human?
+		\end{itemize}
+		\item Rationality
+		\begin{itemize}
+			\item Does it always attempt to choose the option that will attain the best outcome? Or when there is uncertainty, the best expected outcome.
+		\end{itemize}
+	\end{itemize}
+\end{itemize}
+\section*{Chapter 2 -- Intelligent Agents}
+\begin{itemize}
+	\item Vocab:
+	\begin{itemize}
+		\item Agent -- can be viewed as perceiving its environment through sensors and acting upon that environment through actuators
+		\item Percept -- Agent's perceptual input (usually through sensors)
+	\end{itemize}
+	\item PEAS:
+		\begin{itemize}
+			\item Performance Measurement -- How can we determine how well the agent performs its tasks?
+			\item Environment -- What situation is the Agent going to be acting in?
+			\item Actuators -- How will the Agent perform actions within its environment?
+			\item Sensors -- How will the Agent gather information about its environment?
+		\end{itemize}
+	\item Properties of task environments:
+	\begin{itemize}
+		\item Fully Observable vs Partially Observable -- Can the sensors detect all aspects that are relevant to the course of action?(Fully Observable) Can the sensors only detect part of the relevant data or noisy/inaccurate sensors? (Partially Observable)
+		\item Single Agent vs Multi Agent:
+		\begin{itemize}
+			\item Single Agent:
+			\begin{itemize}
+				\item An Agent doing a crossword puzzle
+			\end{itemize}
+			\item Multi Agent:
+			\begin{itemize}
+				\item An Agent competing in a chess game.
+			\end{itemize}
+		\end{itemize}
+		\item Deterministic vs Stochastic -- Is the next state of the environment of the environment fully determined by the current state and the action executed?(Deterministic) otherwise it is stochastic.
+		\item Episodic vs Sequential -- Is the agent's experience divided into atomic episodes, where the next episode does not depend on the previous episode? This is episodic. If any decisions relies upon ones previous to it, it is sequential.
+		\item Static vs Dynamic -- Does the environment change while the agent is deliberating? Then it is dynamic, otherwise it is static
+		\item Discrete vs Continuous -- Is there a finite number of distinct states, percepts and actions? Then it is discrete, otherwise it is Continuous. 
+	\end{itemize}
+\end{itemize}
+\section*{Chapter 3 -- Problem Solving Agents}
+\begin{itemize}
+	\item Problem Formulation -- The process of deciding what actions and states to consider given a goal
+	\item Goal Formulation -- Based on the current situation, and the agent's performance measure.
+	\item Fully formulating a problem
+	\begin{itemize}
+		\item The Initial State -- Where/how the agent begins
+		\item Actions -- What can the agent perform within this problem?
+		\item Transition Model/Successor -- What does each action do? How to we move from one state to another state?
+		\item State Space -- The set of all states reachable from the initial state by any set of actions
+		\item Goal Test -- Determine if a current state is a goal state. (Based off predetermined goal)
+		\item Path Cost -- A numeric cost to each path from one state to another(Value of edges in graph)
+	\end{itemize}
+	\item Measuring Algorithms
+	\begin{itemize}
+		\item Completeness - Is it guaranteed to find a solution if there is one?
+		\item Optimality - Does it find an optimal solution?
+		\item Time complexity - How long does it take to find a solution?
+		\item Space complexity - How much memory is needed to perform the search?
+	\end{itemize}
+	\item Branching Factor -- the max number actions each node can take
+	\item Depth -- The shallowest goal node in any path of the state space
+	\item Uninformed Search Algorithms:
+	\begin{itemize}
+		\item BFS -- Breadth First Search pg81
+		\item UCS -- Uniform Cost Search -- Djikstra's Algorithm pg83
+		\item DFS -- Depth First Search pg85
+		\item DLS -- Depth Limited Search -- DFS with a depth limit pg87
+		\item IDS -- Iterative Deepening(depth first) search -- Gradually increase depth limit until goal is found pg88
+		\item BDS -- Bidirectional Search -- Run two simultaneous search 1 from initial and one back from goal. pg90
+	\end{itemize}
+	\item Heuristics:
+	\begin{itemize}
+		\item Additional information that allows an agent to learn for itself
+		\item Admissible -- To be admissible a heuristic must NOT overestimate the true cost to reach the goal
+		\item Consistency/Monotonicity -- The heuristic must be a consistent representation of the information. One node's heuristic can't vastly underestimate while another is close. (Triangle Inequality -- Each side of a triangle can't be longer than the sum of the two other sides)
+	\end{itemize}
+	\item Informed Search Strategies
+	\begin{itemize}
+		\item Greedy Best First Search -- Attempts to expand the node that is closes to the goal, only using the heuristic to make decisions. $f(n)=h(n)$ pg92
+		\item A* Search -- $f(n) = g(n)+h(n)$ where $g(n)$ is the cost to get from one state and $h(n)$ is the heuristic to get from the node to the goal and $f(n)$ is the estimated cost of the cheapest solution through $n$. Identical to Djikstras but uses $g(n) + h(n)$ instead of just $g(n)$ pg93
+	\end{itemize}
+	\item Memory Bounded Heuristic Search -- We didn't discuss these, but they're in his notes.
+	\begin{itemize}
+		\item Iterative Deepening A* (IDA*)
+		\item Recursive best-first search (RBFS)
+		\item Memory-bounded A* (MA*)
+		\item Simplified MA* (SMA*)		
+	\end{itemize}
+\end{itemize}
+\section*{Chapter 5 -- Adversarial Search}
+\begin{itemize}
+	\item Minimax algorithm: pg166
+	\begin{itemize}
+		\item Effectively a DFS that assigns leaf nodes a value and every parent chooses the minimum or maximum value based off of the children's value. Traditionally the user will be a Max node (denoted with a upright triangle) and the opponent will be a min node (denoted with a downward triangle)
+	\end{itemize}
+	\item alpha-beta $(alpha, \beta)$ pruning pg167
+	\begin{itemize}
+		\item Used in conjunction with the minimax algorithm. 
+		\item On a Max node, you check if the Max value of your children are $\geq \beta$ if so, then return 
+		\item On a Min node, you check the Min value of your children are $\leq \alpha$, if so, then return.
+		\item WATCH A VIDEO IT CAN EXPLAIN BETTER THAN THIS EVER WILL
+	\end{itemize}
+	\item Search vs Lookup -- If there is a discrete amount of moves that can be held within memory, it is computationally less expensive to just do a table lookup for the best next move rather than computing it.
+\end{itemize}
+\section*{Chapter 6 -- Constraint Satisfaction Problems}
+\begin{itemize}
+	\item Constraint Satisfaction Problems -- A problem solved when each variable has a value that has satisfied all constraints on the variable
+	\item Formulating a CSP:
+	\begin{itemize}
+		\item Variables
+		\item Domain for the Variables -- The possible values for the variables
+		\item Constraints -- The rules for validation on the variables
+		\item Solutions are Valid variable assignments
+	\end{itemize}
+	\item Binary Constraints -- Relates two variables (e.g. $SA \ne NSW$). Can be represented as a constraint graph. All ternary (and n-ary) constraints can and should be reduced to binary. Unary constraints can and should reduce the domain of a variable, by doing so, removing the Unary constraint.
+	\item Arc Consistency (concept)-- Every value in its domain satisfies the binary constraints. Can be performed to reduce the domain and the search space within the CSP. pg209
+	\item Strategies to Solving CSPs
+	\begin{itemize}
+		\item Incremental -- Start with no variables assigned. Assign variables one by one ensuring that the variable satisfies all constraints
+		\item Constraint Propagation -- Use constraints to reduce the legal values for a variable, reducing the domain of the variable
+		\item Arc Consistency(algorithm) -- AC3 -- If a node loses a state in the domain, check it's neighbors to ensure that it is still solvable, reducing the potential domains of the neighbors. pg 209
+		\item Backtracking Search -- An incremental approach and backtracks when no legal moves are available. pg 215
+	\end{itemize}
+	\item Choosing Heuristics for CSPs
+	\begin{itemize}
+		\item Minimum Remaining Values -- Choose a variable that has the fewest options in the domain. Attempts to get a dead end as soon as possible (if a dead end exists)
+		\item Degree -- Choose the variable that has the most children. This option will reduce the domain of the most neighbors
+		\item Least Constraining Value -- Choose the value for the variable that will least reduce the domain of its neighbors
+		\item Forward Checking/Inference -- When a variable is assigned, it checks arc consistency reducing the domain of the neighbors (see AC3)
+		\item Min Conflicts -- Choose a value that violates the fewest constraints
+	\end{itemize}
+\end{itemize}
+\end{document}
