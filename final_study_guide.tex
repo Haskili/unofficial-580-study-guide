@@ -1,0 +1,41 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{natbib}
+\usepackage{graphicx}
+
+\title{580 Final Study Guide}
+\author{Connor A.}
+\date{Spring 2020}
+
+\begin{document}
+
+\maketitle
+\huge
+\textbf{Chapter 17}
+
+\normalsize
+\section{What's a MDP?}
+\begin{itemize}
+  \item With an MDP there's \textbf{uncertainty} in the result of an action --- \textbf{in what state we'll end up in after we transition from state s to s'}
+  \item The possible outcomes/states of an action depends only on the state we're currently in.
+  \item Formally, it's defined by --- set of states s $\in$ S, set of actions a $\in$ A, and transition function T(s, a, s').
+  \item A transition function T() returns probability of getting to next state we want as well as the next state we actually ended up in.
+\end{itemize}
+
+\section{Example MDP \textit{(Grid World)}}
+\begin{itemize}
+    \item Each cell is a state, 11 states because the "12th" is unreachable
+    \item 5 actions, (N|S|E|W) and 'exiting'
+    \item Reward function R() --- Cost of each "step", negative in this case to maximize utility
+\end{itemize}
+
+\pagebreak
+\section{Policy}
+\begin{itemize}
+    \item We solve a MVP by coming up with a policy --- \textbf{a reward system}, R(s) 
+    \item Given all states, we ask what is the \textbf{optimal action} to take at each individual state
+    \item We want something that will \textbf{maximize utility}
+    \item Works best if state space is \textbf{small}
+\end{itemize}
+
+\end{document}
